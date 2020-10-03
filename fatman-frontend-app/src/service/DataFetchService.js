@@ -1,4 +1,5 @@
 import api from '../shared/api'
+import Entry from '../models/Entry'
 
 class DataFetchService {
 
@@ -6,7 +7,7 @@ class DataFetchService {
         return api.get('/fetch').then((response) =>{
             const responseObj = response.data;
             console.log(responseObj);
-            return responseObj.map(movie => new Movie(movie)).splice(0, 50);
+            return responseObj.map(entry => new Entry(entry));
         })
     }
 
@@ -14,7 +15,7 @@ class DataFetchService {
         return api.get('/fetch_month').then((response) =>{
             const responseObj = response.data;
             console.log(responseObj);
-            return new Movie(responseObj);
+            return responseObj.map(entry => new Entry(entry));
         })
     }
 }

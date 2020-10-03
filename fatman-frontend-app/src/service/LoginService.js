@@ -1,13 +1,15 @@
 import api from '../shared/api'
-import { Cookies } from 'react-cookie';
+import  Cookies from 'js-cookie';
 
 class LoginService {
 
-    login() {
-        return api.get('/shows').then((response) =>{
-            const responseObj = response.data;
-            console.log(responseObj);
-            return responseObj.map(movie => new Movie(movie)).splice(0, 50);
+    login(values) {
+        const token = Buffer.from(`${values.username}:${values.password}`, 'utf8').toString('base64')
+        api.defaults.headers.common["Access-Control-Allow-Origin"] = '*'
+        api.defaults.headers.common["Authorization"] = 'Basic ' + token
+        return api.get('/login').then((response) =>{
+            console.log(response);
+            Cookies.set('x-access-token', response.data['token'], { sameSite: 'strict' })
         })
     }
 }
