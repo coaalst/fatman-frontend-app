@@ -4,10 +4,10 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 
 import ControlPanel from './control/ControlPanel';
+import ChartPanel from './data/ChartPanel'
+
 function Main() {
     return (
         <div>
@@ -26,15 +26,11 @@ function Main() {
             <div class="p-3 bg-secondary text-white">
                 <Container >
                     <Row>
-                        <Col md={{ span: 8 }} xs={{ span: 8 }}>
-                        <Card>
-                                <Card.Title class="text-dark" className='m-3'>Necu asni</Card.Title>
-                               
-                            </Card>
+                        <Col md={{ span: 8 }} xs={{ span: 12 }}>
+                            <ChartPanel />
                         </Col>
-                        <Col md={{ span: 4 }} xs={{ span: 4 }}>
-                            
-                            <ControlPanel/>
+                        <Col md={{ span: 4 }} xs={{ span: 12 }}>
+                            <ControlPanel />
                         </Col>
                     </Row>
                 </Container>

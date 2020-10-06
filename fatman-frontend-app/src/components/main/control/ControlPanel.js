@@ -1,33 +1,27 @@
-import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import ProgressBar from 'react-bootstrap/ProgressBar';
 import Alert from 'react-bootstrap/Alert'
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 
 import ConfigUpdateService from '../../../service/ConfigUpdateService'
 
-function ControlPanel(props) {
+function ControlPanel() {
 
-    const [data, setData] = useState(null);
-    const [prog, setProg] = useState(0)
     const [show, setShow] = useState(false);
     const { handleSubmit, register } = useForm();
 
 
     const onSubmit = values => {
-        setProg(5)
         console.log(values);
-        ConfigUpdateService.update_config(values).then(setProg(100)).catch()
+        ConfigUpdateService.update_config(values).then(setShow(true))
     }
     return (
-        <div md={{ span: 8 }} xs={{ span: 8 }}>
-
+        <div>
             <Card className='p-3'>
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <Row>
@@ -78,7 +72,7 @@ function ControlPanel(props) {
                             <p className='mr-3' class="text-dark"> Svetlo od</p>
                         </Col>
                         <Col className='ml-3'>
-                            <Form.Control ref={register} name="interval-start" placeholder="23:00" />
+                            <Form.Control ref={register} name="interval_start" placeholder="23:00" />
                         </Col>
                     </Row>
                     <Row>
@@ -86,7 +80,7 @@ function ControlPanel(props) {
                             <p className='mr-3' class="text-dark"> Svetlo do</p>
                         </Col>
                         <Col className='ml-3'>
-                            <Form.Control ref={register} name="interval-stop" placeholder="11:00" />
+                            <Form.Control ref={register} name="interval_stop" placeholder="11:00" />
                         </Col>
                     </Row>
                     <hr></hr>
@@ -133,10 +127,11 @@ function ControlPanel(props) {
                         </Col>
                     </Row>
                     <Row>
-                        <Col><ProgressBar variant="success" now={prog} label={`${prog}%`} /></Col>
-                        <Alert show={show} variant="danger">
-                            Nisi osurio bika prika
-                        </Alert>
+                        <Col>
+                            <Alert show={show} variant="success">
+                                Konfig apdejtovan
+                            </Alert>
+                        </Col>
                     </Row>
                 </Form>
             </Card>

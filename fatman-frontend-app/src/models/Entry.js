@@ -9,12 +9,4 @@ export default class Entry {
         this.pump_state = pump_state
         this.date = date
     }
-
-    get temp() {
-        return this.temp
-    }
-
-    get humidity() {
-        return  this.humidity
-    }
 }
